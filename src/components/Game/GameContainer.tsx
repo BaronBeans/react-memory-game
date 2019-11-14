@@ -46,7 +46,7 @@ const GameContainer = () => {
                 ))}
             </div>
             {gameOver &&
-                <Button onClick={startOver}>New Game</Button>
+                <Button variant="contained" color="primary" onClick={startOver}>New Game</Button>
             }
         </div>
     );
