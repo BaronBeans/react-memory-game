@@ -14,11 +14,18 @@ const reducer = (state: Game, action: { type: string, payload?: any }) => {
                 return c;
             }));
         case "HIDE_ALL":
-            return new Game(state.deck.map(c => ({ ...c, visible: false })));
+            return new Game(state.deck.map(c => ({ ...c, visible: false, mismatched: false })));
         case "MATCH_THEM":
             return new Game(state.deck.map(c => {
                 if (action.payload.includes(c.value)) {
                     c.matched = true;
+                }
+                return c;
+            }));
+        case "FAIL":
+            return new Game(state.deck.map(c => {
+                if (action.payload.includes(c.value)) {
+                    c.mismatched = true;
                 }
                 return c;
             }));

@@ -44,5 +44,11 @@
 }
 
 .MuiPaper-root.MuiPaper-elevation1.MuiCard-root.card.matched.MuiPaper-rounded {
-  background-color: lightgreen;
+  background-color: green;
+  color: white;
+}
+
+.MuiPaper-root.MuiPaper-elevation1.MuiCard-root.card.mismatched.MuiPaper-rounded {
+  background-color: red;
+  color: white;
 }

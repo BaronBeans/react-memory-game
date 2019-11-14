@@ -1,5 +1,5 @@
 import React, { createContext, FunctionComponent, ReactNode, useReducer } from "react";
-import { reducer, initialState } from "./GameState";
+import { initialState, reducer } from "./GameState";
 
 export const AppContext = createContext<any>(null);
 
