@@ -1,19 +1,28 @@
 import { Card, CardContent } from "@material-ui/core";
-import React, { FC, useState, useContext, useEffect } from "react";
+import React, { FC, useContext } from "react";
 import { AppContext } from "../../state";
 
-const GameCard: FC<{ value: number, isVisible: boolean }> = ({ value, isVisible }) => {
-    const [visible, setVisible] = useState<boolean>(isVisible);
+const GameCard: FC<{ value: number, isVisible: boolean, isMatched: boolean }> = ({ value, isVisible, isMatched }) => {
     const { dispatch } = useContext(AppContext);
 
-    useEffect(() => {
-        dispatch({ type: "SHOW_HIDE_CARD", payload: { visible } })
-    }, [visible, dispatch]);
+    const toggleCard = () => {
+        dispatch({ type: "SHOW_HIDE_CARD", payload: { value, isVisible } })
+    }
+
+    if (isMatched) {
+        return (
+            <Card className="card matched" onClick={toggleCard}>
+                <CardContent className="card-content">
+                    {(value > 5 ? value - 5 : value)}
+                </CardContent>
+            </Card>
+        )
+    }
 
     return (
-        <Card className="card" onClick={() => setVisible(!visible)}>
+        <Card className="card" onClick={toggleCard}>
             <CardContent className="card-content">
-                {visible && (value > 5 ? value - 5 : value)}
+                {isVisible && (value > 5 ? value - 5 : value)}
             </CardContent>
         </Card>
     )

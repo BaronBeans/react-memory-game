@@ -42,3 +42,7 @@
     margin: 1rem 2rem;
   }
 }
+
+.MuiPaper-root.MuiPaper-elevation1.MuiCard-root.card.matched.MuiPaper-rounded {
+  background-color: lightgreen;
+}
