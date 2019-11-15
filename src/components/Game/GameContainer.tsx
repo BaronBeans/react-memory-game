@@ -21,7 +21,7 @@ const GameContainer = () => {
 
     return (
         <div className="game-container">
-            <h1>React Memory Game - v1.0</h1>
+            <h1>React Memory Game</h1>
             <div className="card-container">
                 {deck.map((card: ICard) => (
                     <GameCard key={deck.indexOf(card)} value={card.value} isVisible={card.visible} isMatched={card.matched} isMismatched={card.mismatched} />
