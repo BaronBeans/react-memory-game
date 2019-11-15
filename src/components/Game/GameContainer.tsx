@@ -1,8 +1,8 @@
+import { Button } from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../state";
-import { GameCard } from "./GameCard";
 import { ICard } from "../../state/Game";
-import { Button } from "@material-ui/core";
+import { GameCard } from "./GameCard";
 
 const GameContainer = () => {
     const { game, dispatch } = useContext(AppContext);
@@ -10,7 +10,10 @@ const GameContainer = () => {
 
     const { deck } = game;
 
-    const startOver = () => dispatch({ type: "NEW_GAME" });
+    const startOver = () => {
+        dispatch({ type: "NEW_GAME" });
+        window.location.reload(true);
+    }
 
     useEffect(() => {
         (game.deck.filter((c: ICard) => !c.matched).length === 0) ? setGameOver(true) : setGameOver(false);
@@ -18,7 +21,7 @@ const GameContainer = () => {
 
     return (
         <div className="game-container">
-            <h1>React Memory Game</h1>
+            <h1>React Memory Game - v1.0</h1>
             <div className="card-container">
                 {deck.map((card: ICard) => (
                     <GameCard key={deck.indexOf(card)} value={card.value} isVisible={card.visible} isMatched={card.matched} isMismatched={card.mismatched} />
@@ -32,3 +35,4 @@ const GameContainer = () => {
 };
 
 export { GameContainer };
+
