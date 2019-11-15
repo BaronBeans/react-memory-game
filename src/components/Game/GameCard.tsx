@@ -4,9 +4,13 @@ import { AppContext } from "../../state";
 import { ICard } from "../../state/Game";
 
 const GameCard: FC<{ value: number, isVisible: boolean, isMatched: boolean, isMismatched: boolean }> = ({ value, isVisible, isMatched, isMismatched }) => {
-    const { game, dispatch } = useContext(AppContext);
+    const { game, dispatch, locked, setLocked } = useContext(AppContext);
 
     const toggleCard = () => {
+        if (locked) {
+            return;
+        }
+
         dispatch({ type: "SHOW_HIDE_CARD", payload: { value, isVisible } })
         const selectedCards = game.deck.filter((c: ICard) => c.visible).map((c: ICard) => (c.value));
         if (selectedCards.length < 2) {
@@ -14,12 +18,14 @@ const GameCard: FC<{ value: number, isVisible: boolean, isMatched: boolean, isMi
         }
         const [card1, card2] = selectedCards;
         if (card1 - card2 === 5 || card2 - card1 === 5) {
-            dispatch({ type: "MATCH_CARDS" })
+            dispatch({ type: "MATCH_CARDS" });
             return;
         }
-        dispatch({ type: "MISMATCH_CARDS" })
+        dispatch({ type: "MISMATCH_CARDS" });
+        setLocked(true);
         setTimeout(() => {
-            dispatch({ type: "RESET_MISMATCHED_CARDS" })
+            dispatch({ type: "RESET_MISMATCHED_CARDS" });
+            setLocked(false);
         }, 1000);
         return;
     }
