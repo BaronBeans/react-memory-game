@@ -10,10 +10,7 @@ const GameContainer = () => {
 
     const { deck } = game;
 
-    const startOver = () => {
-        dispatch({ type: "NEW_GAME" });
-        window.location.reload(true);
-    }
+    const startOver = () => dispatch({ type: "NEW_GAME" });
 
     useEffect(() => {
         (game.deck.filter((c: ICard) => !c.matched).length === 0) ? setGameOver(true) : setGameOver(false);
