@@ -7,7 +7,7 @@ const GameCard: FC<{ value: number, isVisible: boolean, isMatched: boolean, isMi
     const { game, dispatch, locked, setLocked } = useContext(AppContext);
 
     const toggleCard = () => {
-        if (locked) {
+        if (locked || isMatched) {
             return;
         }
 
