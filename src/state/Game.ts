@@ -1,3 +1,4 @@
+
 export interface ICard {
     value: number;
     visible: boolean;
@@ -5,11 +6,22 @@ export interface ICard {
     mismatched: boolean;
 }
 
+export enum Difficulty {
+    Easy = "Easy",
+    Hard = "Hard"
+}
+
+export interface IGameSettings {
+    difficulty: Difficulty;
+}
+
 export class Game {
     public deck: ICard[];
+    public gameSettings: IGameSettings;
 
-    constructor(deck?: ICard[]) {
+    constructor(deck?: ICard[], gameSettings?: IGameSettings) {
         this.deck = deck || this.randomShuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).map(rs => ({ value: rs, visible: false, matched: false, mismatched: false } as ICard));
+        this.gameSettings = gameSettings || { difficulty: Difficulty.Easy };
     }
 
     /**
@@ -77,6 +89,10 @@ export class Game {
         });
 
         return this;
+    }
+
+    public setGameDifficulty(newDifficulty: Difficulty) {
+        this.gameSettings = { ...this.gameSettings, difficulty: newDifficulty };
     }
 
     private randomShuffle = (deck: number[]) => deck.sort((a, b) => 0.5 - Math.random());

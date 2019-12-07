@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../state";
 import { ICard } from "../../state/Game";
 import { GameCard } from "./GameCard";
+import { GameSettings } from "./GameSettings";
 
 const GameContainer = () => {
     const { game, dispatch } = useContext(AppContext);
@@ -19,6 +20,7 @@ const GameContainer = () => {
     return (
         <div className="game-container">
             <h1>React Memory Game</h1>
+            <GameSettings />
             <div className="card-container">
                 {deck.map((card: ICard) => (
                     <GameCard key={deck.indexOf(card)} value={card.value} isVisible={card.visible} isMatched={card.matched} isMismatched={card.mismatched} />

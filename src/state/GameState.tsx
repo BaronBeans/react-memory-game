@@ -1,4 +1,4 @@
-import { Game } from "./Game";
+import { Game, Difficulty } from "./Game";
 
 const initialState = new Game();
 
@@ -26,7 +26,9 @@ const reducer = (state: Game, action: { type: string, payload?: any }) => {
                 return c;
             }));
         // return state.resetMisMatchedCards();
-
+        case "TOGGLE_DIFFICULTY":
+            state.setGameDifficulty(state.gameSettings.difficulty === Difficulty.Easy ? Difficulty.Hard : Difficulty.Easy);
+            return state;
         default:
             return state;
     }
